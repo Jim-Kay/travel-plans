@@ -472,6 +472,20 @@
       text-align: center;
     }
 
+    .event.travel {
+      border-color: rgba(174, 91, 61, 0.28);
+      background: #fffaf7;
+    }
+
+    .event.travel .event-time {
+      background: var(--terracotta-soft);
+      color: #7b3f2b;
+    }
+
+    .event.travel .event-meta {
+      background: #fff7f2;
+    }
+
     .event-body {
       padding: 16px 0;
     }
@@ -563,53 +577,6 @@
       color: #30404a;
       font-size: 12px;
       font-weight: 800;
-    }
-
-    .leave-board {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
-      margin-top: 20px;
-    }
-
-    .leave-card {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 18px;
-      background: var(--paper);
-    }
-
-    .leave-card h3 {
-      margin: 0 0 11px;
-      font-size: 20px;
-    }
-
-    .leave-item {
-      display: grid;
-      grid-template-columns: 74px 1fr;
-      gap: 11px;
-      padding: 10px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .leave-item:first-of-type {
-      border-top: 0;
-    }
-
-    .leave-time {
-      color: var(--terracotta);
-      font-weight: 900;
-    }
-
-    .leave-detail b {
-      display: block;
-      margin-bottom: 2px;
-    }
-
-    .leave-detail span {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.4;
     }
 
     .places-section,
@@ -866,7 +833,7 @@
         </header>
 
         <div class="timeline">
-          <section class="event" data-people="hk sk">
+          <section class="event travel" data-people="hk sk">
             <div class="event-time">Morning</div>
             <div class="event-body">
               <div class="event-title">
@@ -875,7 +842,7 @@
               </div>
               <p>They planned to leave in the morning and arrive around noon to see Dad and Maria.</p>
             </div>
-            <div class="event-meta"><span class="chip">Hal</span><span class="chip">Stacy</span><span class="chip">Edenwald area</span></div>
+            <div class="event-meta"><span class="chip">Travel</span><span class="chip">Target 11:45</span><span class="chip">Edenwald area</span></div>
           </section>
 
           <section class="event" data-people="d m hk sk">
@@ -902,6 +869,18 @@
             <div class="event-meta"><span class="chip">No earlier than 4:00</span><span class="chip">Dogs</span></div>
           </section>
 
+          <section class="event travel" data-people="d m">
+            <div class="event-time">5:15 pm</div>
+            <div class="event-body">
+              <div class="event-title">
+                <h3>Dad and Maria travel to rental</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria"><span class="person-dot d" title="Dad">D</span><span class="person-dot m" title="Maria">M</span></div>
+              </div>
+              <p>Leave Edenwald by about 5:15 pm to arrive at the Catonsville rental before 6:00 pm dinner.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Travel</span><span class="chip">Edenwald to rental</span><span class="chip">Allocate 45 min</span></div>
+          </section>
+
           <section class="event" data-people="d m jk fk hk sk">
             <div class="event-time">6:00 pm</div>
             <div class="event-body">
@@ -913,18 +892,20 @@
             </div>
             <div class="event-meta"><span class="chip">Catonsville rental</span><span class="chip">Takeout</span></div>
           </section>
-        </div>
-        <p class="filter-empty">No Friday itinerary items match this person.</p>
 
-        <div class="leave-board">
-          <section class="leave-card">
-            <h3>Leave Times</h3>
-            <div class="leave-item"><div class="leave-time">11:45</div><div class="leave-detail"><b>Hal/Stacy arrival target</b><span>Reach Edenwald area by 11:45 am for a noon lunch.</span></div></div>
-            <div class="leave-item"><div class="leave-time">4:00</div><div class="leave-detail"><b>Rental check-in opens</b><span>No rental access before 4:00 pm.</span></div></div>
-            <div class="leave-item"><div class="leave-time">5:15</div><div class="leave-detail"><b>Dad/Maria leave Edenwald</b><span>Arrive at the rental before a 6:00 pm dinner.</span></div></div>
-            <div class="leave-item"><div class="leave-time">5:30</div><div class="leave-detail"><b>Rental group ready</b><span>After check-in, be settled by 5:30-5:45 pm.</span></div></div>
+          <section class="event travel" data-people="d m hk">
+            <div class="event-time">After</div>
+            <div class="event-body">
+              <div class="event-title">
+                <h3>Return ride to Edenwald</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria, Hal"><span class="person-dot d" title="Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot hk" title="Hal">HK</span></div>
+              </div>
+              <p>Hal can drive Dad and Maria back to Edenwald after dinner, or the return can happen as arranged that night.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Travel</span><span class="chip">Rental to Edenwald</span><span class="chip">Allocate 45 min</span></div>
           </section>
         </div>
+        <p class="filter-empty">No Friday itinerary items match this person.</p>
       </article>
 
       <article class="day-panel" id="saturday" role="tabpanel" aria-labelledby="tab-saturday">
@@ -937,6 +918,18 @@
         </header>
 
         <div class="timeline">
+          <section class="event travel" data-people="d m jk fk">
+            <div class="event-time">10:25 am</div>
+            <div class="event-body">
+              <div class="event-title">
+                <h3>Jim heads to pick up Harold and Maria</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria, Jim; Francine optional"><span class="person-dot d" title="Harold / Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot jk" title="Jim">JK</span><span class="person-dot fk" title="Francine optional">FK</span></div>
+              </div>
+              <p>Jim leaves the rental around 10:25-10:30 am to pick up Harold/Dad and Maria at Edenwald. Francine may ride along if she wants.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Travel</span><span class="chip">Rental to Edenwald</span><span class="chip">Allocate 45 min</span></div>
+          </section>
+
           <section class="event" data-people="jk fk hk sk">
             <div class="event-time">10:45 am</div>
             <div class="event-body">
@@ -947,6 +940,18 @@
               <p>Francine handles grilled sourdough sandwiches; Stacy plans steamed or baked veggies and quinoa. Nearby Giant and HMart can cover missing groceries.</p>
             </div>
             <div class="event-meta"><span class="chip">Rental group</span><span class="chip">Kitchen</span></div>
+          </section>
+
+          <section class="event travel" data-people="d m jk fk">
+            <div class="event-time">11:10 am</div>
+            <div class="event-body">
+              <div class="event-title">
+                <h3>Jim brings Harold and Maria to rental</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria, Jim; Francine optional"><span class="person-dot d" title="Harold / Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot jk" title="Jim">JK</span><span class="person-dot fk" title="Francine optional">FK</span></div>
+              </div>
+              <p>After pickup, Jim drives Harold/Dad and Maria from Edenwald back to the rental for noon lunch. Francine optional.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Travel</span><span class="chip">Edenwald to rental</span><span class="chip">Arrive by noon</span></div>
           </section>
 
           <section class="event" data-people="d m jk fk hk sk">
@@ -961,16 +966,76 @@
             <div class="event-meta"><span class="chip">All six</span><span class="chip">Catonsville</span></div>
           </section>
 
-          <section class="event" data-people="d m jk fk hk sk">
+          <section class="event travel" data-people="d m jk fk hk sk">
             <div class="event-time">2:45 pm</div>
             <div class="event-body">
               <div class="event-title">
-                <h3>Jim drives Harold and Maria for Mass</h3>
+                <h3>Jim drives Harold and Maria to Mass</h3>
                 <div class="person-dots" aria-label="People: Dad, Maria, Jim; Francine optional; Hal and Stacy undecided"><span class="person-dot d" title="Harold / Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot jk" title="Jim">JK</span><span class="person-dot fk" title="Francine optional">FK</span><span class="person-dot hk" title="Hal, TBD">HK</span><span class="person-dot sk" title="Stacy, TBD">SK</span></div>
               </div>
-              <p>Jim drives Harold/Dad and Maria. Jim and Francine are not attending Mass; Francine may ride along if she wants. Hal and Stacy are still undecided.</p>
+              <p>Jim drives Harold/Dad and Maria from the rental toward 4:00 pm Mass. Francine may ride along if she wants. Hal and Stacy are still undecided.</p>
             </div>
-            <div class="event-meta"><span class="chip">Jim driving</span><span class="chip">Harold/Maria</span><span class="chip">Francine optional</span><span class="chip">Hal/Stacy TBD</span></div>
+            <div class="event-meta"><span class="chip">Travel</span><span class="chip">Jim driving</span><span class="chip">Harold/Maria</span><span class="chip">Francine optional</span></div>
+          </section>
+
+          <section class="event" data-people="d m hk sk">
+            <div class="event-time">4:00 pm</div>
+            <div class="event-body">
+              <div class="event-title">
+                <h3>Mass</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria; Hal and Stacy undecided"><span class="person-dot d" title="Harold / Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot hk" title="Hal, TBD">HK</span><span class="person-dot sk" title="Stacy, TBD">SK</span></div>
+              </div>
+              <p>Harold/Dad reads at 4:00 pm Mass. Jim and Francine are not attending Mass; Hal and Stacy are undecided.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Event</span><span class="chip">Dad reads</span><span class="chip">Hal/Stacy TBD</span></div>
+          </section>
+
+          <section class="event travel" data-people="d m jk fk">
+            <div class="event-time">After Mass</div>
+            <div class="event-body">
+              <div class="event-title">
+                <h3>Jim handles post-Mass movement</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria, Jim; Francine optional"><span class="person-dot d" title="Harold / Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot jk" title="Jim">JK</span><span class="person-dot fk" title="Francine optional">FK</span></div>
+              </div>
+              <p>Jim handles Harold/Dad and Maria after Mass. Exact pickup/dropoff depends on Mass end time and whether they stage at Edenwald before dinner.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Travel</span><span class="chip">Details TBD</span><span class="chip">Dinner staging</span></div>
+          </section>
+
+          <section class="event travel" data-people="d m jk fk">
+            <div class="event-time">5:10 pm</div>
+            <div class="event-body">
+              <div class="event-title">
+                <h3>Jim dinner route begins</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria, Jim; Francine optional"><span class="person-dot d" title="Harold / Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot jk" title="Jim">JK</span><span class="person-dot fk" title="Francine optional">FK</span></div>
+              </div>
+              <p>If starting from the rental, Jim leaves around 5:10 pm for Edenwald. If already with Harold/Dad and Maria after Mass, this becomes the dinner staging window.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Travel</span><span class="chip">Rental to Edenwald</span><span class="chip">If needed</span></div>
+          </section>
+
+          <section class="event travel" data-people="hk sk">
+            <div class="event-time">5:15 pm</div>
+            <div class="event-body">
+              <div class="event-title">
+                <h3>Hal and Stacy pick up Linda and Milton</h3>
+                <div class="person-dots" aria-label="People: Hal, Stacy"><span class="person-dot hk" title="Hal">HK</span><span class="person-dot sk" title="Stacy">SK</span></div>
+              </div>
+              <p>Hal and Stacy leave the rental around 5:15-5:25 pm, pick up Linda and Milton in Cockeysville, then continue to dinner.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Travel</span><span class="chip">Cockeysville pickup</span><span class="chip">Local buffer</span></div>
+          </section>
+
+          <section class="event travel" data-people="d m jk fk">
+            <div class="event-time">5:55 pm</div>
+            <div class="event-body">
+              <div class="event-title">
+                <h3>Jim, Harold, and Maria continue to dinner</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria, Jim; Francine optional"><span class="person-dot d" title="Harold / Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot jk" title="Jim">JK</span><span class="person-dot fk" title="Francine optional">FK</span></div>
+              </div>
+              <p>Harold/Dad and Maria should be ready around 5:50 pm. Leave Edenwald or the post-Mass staging point by 5:55-6:05 pm for dinner.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Travel</span><span class="chip">To Cockeysville dinner</span><span class="chip">Allocate 30-35 min</span></div>
           </section>
 
           <section class="event" data-people="d m jk fk hk sk">
@@ -984,19 +1049,20 @@
             </div>
             <div class="event-meta"><span class="chip">Indian Ocean candidate</span><span class="chip">Two-car pickup plan</span><span class="chip">Linda/Milton join</span></div>
           </section>
-        </div>
-        <p class="filter-empty">No Saturday itinerary items match this person.</p>
 
-        <div class="leave-board">
-          <section class="leave-card">
-            <h3>Leave and Ride Times</h3>
-            <div class="leave-item"><div class="leave-time">10:25</div><div class="leave-detail"><b>Jim lunch pickup route</b><span>Leave rental around 10:25-10:30 am to pick up Harold/Maria at Edenwald, then return for noon lunch. Francine optional.</span></div></div>
-            <div class="leave-item"><div class="leave-time">2:45</div><div class="leave-detail"><b>Jim Mass shuttle</b><span>Drive Harold/Maria from the rental for 4:00 pm Mass. Francine optional on the ride.</span></div></div>
-            <div class="leave-item"><div class="leave-time">5:10</div><div class="leave-detail"><b>Jim dinner pickup route</b><span>Leave rental to pick up Harold/Maria at Edenwald, then continue to dinner. Francine optional.</span></div></div>
-            <div class="leave-item"><div class="leave-time">5:15</div><div class="leave-detail"><b>Hal/Stacy pickup route</b><span>Leave rental around 5:15-5:25 pm for a Cockeysville pickup, then continue to dinner.</span></div></div>
-            <div class="leave-item"><div class="leave-time">After</div><div class="leave-detail"><b>Return rides</b><span>Jim takes Harold/Maria back; Francine may ride along. Hal/Stacy take Linda/Milton back.</span></div></div>
+          <section class="event travel" data-people="d m jk fk hk sk">
+            <div class="event-time">After</div>
+            <div class="event-body">
+              <div class="event-title">
+                <h3>Return rides after dinner</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria, Jim, Francine optional, Hal, Stacy"><span class="person-dot d" title="Harold / Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot jk" title="Jim">JK</span><span class="person-dot fk" title="Francine optional">FK</span><span class="person-dot hk" title="Hal">HK</span><span class="person-dot sk" title="Stacy">SK</span></div>
+              </div>
+              <p>Jim takes Harold/Dad and Maria back to Edenwald; Francine may ride along. Hal and Stacy take Linda and Milton back in Cockeysville.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Travel</span><span class="chip">Two return routes</span><span class="chip">End of evening</span></div>
           </section>
         </div>
+        <p class="filter-empty">No Saturday itinerary items match this person.</p>
       </article>
 
       <article class="day-panel" id="sunday" role="tabpanel" aria-labelledby="tab-sunday">
@@ -1019,6 +1085,30 @@
               <p>Francine estimated this takes real time. Jim and Francine are not planning to join breakfast.</p>
             </div>
             <div class="event-meta"><span class="chip">Jim</span><span class="chip">Francine</span><span class="chip">Dogs</span></div>
+          </section>
+
+          <section class="event travel" data-people="d m">
+            <div class="event-time">7:45 am</div>
+            <div class="event-body">
+              <div class="event-title">
+                <h3>Dad and Maria leave Edenwald</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria"><span class="person-dot d" title="Dad">D</span><span class="person-dot m" title="Maria">M</span></div>
+              </div>
+              <p>Leave Edenwald by about 7:45 am for an 8:30 am Panera breakfast in Catonsville.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Travel</span><span class="chip">Edenwald to Panera</span><span class="chip">Allocate 45 min</span></div>
+          </section>
+
+          <section class="event travel" data-people="hk sk">
+            <div class="event-time">8:15 am</div>
+            <div class="event-body">
+              <div class="event-title">
+                <h3>Hal and Stacy leave rental</h3>
+                <div class="person-dots" aria-label="People: Hal, Stacy"><span class="person-dot hk" title="Hal">HK</span><span class="person-dot sk" title="Stacy">SK</span></div>
+              </div>
+              <p>Leave the rental by about 8:15 am for nearby breakfast.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Travel</span><span class="chip">Rental to Panera</span><span class="chip">Local buffer</span></div>
           </section>
 
           <section class="event" data-people="d m hk sk">
@@ -1046,15 +1136,6 @@
           </section>
         </div>
         <p class="filter-empty">No Sunday itinerary items match this person.</p>
-
-        <div class="leave-board">
-          <section class="leave-card">
-            <h3>Leave Times</h3>
-            <div class="leave-item"><div class="leave-time">7:45</div><div class="leave-detail"><b>Dad/Maria leave Edenwald</b><span>For an 8:30 am Panera breakfast in Catonsville.</span></div></div>
-            <div class="leave-item"><div class="leave-time">8:15</div><div class="leave-detail"><b>Hal/Stacy leave rental</b><span>For an 8:30 am nearby breakfast.</span></div></div>
-            <div class="leave-item"><div class="leave-time">Morning</div><div class="leave-detail"><b>Jim/Francine pack up</b><span>Dog meds, packing, loading, and 11:00 am checkout.</span></div></div>
-          </section>
-        </div>
       </article>
     </section>
 
