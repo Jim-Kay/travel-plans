@@ -389,6 +389,11 @@
       color: #fff;
     }
 
+    .filter-button[aria-pressed="true"] .person-dot {
+      border-color: rgba(255, 255, 255, 0.95);
+      box-shadow: none;
+    }
+
     .day-panel {
       display: none;
       padding: 24px;
@@ -434,6 +439,11 @@
       border-radius: 8px;
       background: #fff;
       overflow: hidden;
+    }
+
+    .event.filtered-out,
+    .event[hidden] {
+      display: none !important;
     }
 
     .event-time {
@@ -721,18 +731,33 @@
 
       .person-filter {
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         padding: 12px;
       }
 
       .filter-button {
         width: 100%;
         min-width: 0;
+        min-height: 34px;
+        gap: 0;
+        padding: 5px 8px;
         justify-content: center;
+      }
+
+      .filter-button .person-name {
+        display: none;
+      }
+
+      .filter-button .person-dot {
+        width: 24px;
+        height: 24px;
+        flex-basis: 24px;
+        font-size: 9px;
       }
 
       .filter-label {
         flex: 1 0 100%;
+        grid-column: 1 / -1;
       }
 
       .event-title {
@@ -805,12 +830,12 @@
       <div class="person-filter" aria-label="Filter itinerary by person">
         <span class="filter-label">Filter</span>
         <button class="filter-button" type="button" data-person="all" aria-pressed="true">All</button>
-        <button class="filter-button" type="button" data-person="d" aria-pressed="false"><span class="person-dot d" aria-hidden="true">D</span><span>Dad</span></button>
-        <button class="filter-button" type="button" data-person="m" aria-pressed="false"><span class="person-dot m" aria-hidden="true">M</span><span>Maria</span></button>
-        <button class="filter-button" type="button" data-person="jk" aria-pressed="false"><span class="person-dot jk" aria-hidden="true">JK</span><span>Jim</span></button>
-        <button class="filter-button" type="button" data-person="fk" aria-pressed="false"><span class="person-dot fk" aria-hidden="true">FK</span><span>Francine</span></button>
-        <button class="filter-button" type="button" data-person="hk" aria-pressed="false"><span class="person-dot hk" aria-hidden="true">HK</span><span>Hal</span></button>
-        <button class="filter-button" type="button" data-person="sk" aria-pressed="false"><span class="person-dot sk" aria-hidden="true">SK</span><span>Stacy</span></button>
+        <button class="filter-button" type="button" data-person="d" aria-pressed="false" aria-label="Filter by Dad"><span class="person-dot d" aria-hidden="true">D</span><span class="person-name">Dad</span></button>
+        <button class="filter-button" type="button" data-person="m" aria-pressed="false" aria-label="Filter by Maria"><span class="person-dot m" aria-hidden="true">M</span><span class="person-name">Maria</span></button>
+        <button class="filter-button" type="button" data-person="jk" aria-pressed="false" aria-label="Filter by Jim"><span class="person-dot jk" aria-hidden="true">JK</span><span class="person-name">Jim</span></button>
+        <button class="filter-button" type="button" data-person="fk" aria-pressed="false" aria-label="Filter by Francine"><span class="person-dot fk" aria-hidden="true">FK</span><span class="person-name">Francine</span></button>
+        <button class="filter-button" type="button" data-person="hk" aria-pressed="false" aria-label="Filter by Hal"><span class="person-dot hk" aria-hidden="true">HK</span><span class="person-name">Hal</span></button>
+        <button class="filter-button" type="button" data-person="sk" aria-pressed="false" aria-label="Filter by Stacy"><span class="person-dot sk" aria-hidden="true">SK</span><span class="person-name">Stacy</span></button>
       </div>
 
       <article class="day-panel active" id="friday" role="tabpanel" aria-labelledby="tab-friday">
@@ -1141,7 +1166,10 @@
 
     function applyPersonFilter() {
       events.forEach((event) => {
-        event.hidden = !eventMatchesPerson(event);
+        const isHidden = !eventMatchesPerson(event);
+        event.hidden = isHidden;
+        event.classList.toggle("filtered-out", isHidden);
+        event.setAttribute("aria-hidden", String(isHidden));
       });
 
       panels.forEach((panel) => {
@@ -1173,7 +1201,7 @@
 
     filterButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        activePerson = button.dataset.person;
+        activePerson = button.dataset.person || "all";
         filterButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
         applyPersonFilter();
       });
