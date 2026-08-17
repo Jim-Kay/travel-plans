@@ -2,7 +2,9 @@
 
 A small local static site for family trip plans.
 
-Open `index.html` in a browser to view the trip landing page.
+Published site: <https://jim-kay.github.io/travel-plans/>
+
+Open `index.html` locally in a browser to view the trip landing page without GitHub Pages.
 
 ## Trips
 
