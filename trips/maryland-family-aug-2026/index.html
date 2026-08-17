@@ -441,9 +441,27 @@
       overflow: hidden;
     }
 
-    .event.filtered-out,
-    .event[hidden] {
-      display: none !important;
+    .event.filtered-out {
+      opacity: 0.42;
+      filter: grayscale(0.9);
+      background: #f5f7f6;
+      transition: opacity 160ms ease, filter 160ms ease, background 160ms ease;
+    }
+
+    .event.filtered-out .event-time {
+      background: #e6ebea;
+      color: #6d777d;
+    }
+
+    .event.filtered-out .person-dot,
+    .event.filtered-out .chip {
+      box-shadow: none;
+    }
+
+    .event.filter-match {
+      opacity: 1;
+      filter: none;
+      transition: opacity 160ms ease, filter 160ms ease, background 160ms ease;
     }
 
     .event-time {
@@ -1166,18 +1184,18 @@
 
     function applyPersonFilter() {
       events.forEach((event) => {
-        const isHidden = !eventMatchesPerson(event);
-        event.hidden = isHidden;
-        event.classList.toggle("filtered-out", isHidden);
-        event.setAttribute("aria-hidden", String(isHidden));
+        const isFiltered = activePerson !== "all";
+        const isDimmed = isFiltered && !eventMatchesPerson(event);
+        event.hidden = false;
+        event.classList.toggle("filtered-out", isDimmed);
+        event.classList.toggle("filter-match", isFiltered && !isDimmed);
+        event.setAttribute("aria-hidden", "false");
       });
 
       panels.forEach((panel) => {
-        const panelEvents = Array.from(panel.querySelectorAll(".event[data-people]"));
-        const hasVisibleEvents = panelEvents.some((event) => !event.hidden);
         const emptyMessage = panel.querySelector(".filter-empty");
         if (emptyMessage) {
-          emptyMessage.classList.toggle("active", !hasVisibleEvents);
+          emptyMessage.classList.remove("active");
         }
       });
     }
