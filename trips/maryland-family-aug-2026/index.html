@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maryland Family Visit</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #162126;
+      --muted: #5d6870;
+      --soft: #eef4f1;
+      --paper: #fffdf8;
+      --line: #dce3e0;
+      --pine: #266956;
+      --pine-dark: #17483c;
+      --terracotta: #ae5b3d;
+      --terracotta-soft: #f6ded2;
+      --blue: #2d6f8f;
+      --blue-soft: #dceff5;
+      --gold: #e4b84e;
+      --gold-soft: #fbf0cd;
+      --shadow: 0 18px 55px rgba(22, 33, 38, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        linear-gradient(115deg, rgba(220, 239, 245, 0.85), rgba(255, 253, 248, 0.82) 46%, rgba(246, 222, 210, 0.72)),
+        repeating-linear-gradient(45deg, rgba(38, 105, 86, 0.04) 0 1px, transparent 1px 18px);
+      color: var(--ink);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 52px;
+    }
+
+    .top-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      color: var(--pine-dark);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+      gap: 28px;
+      align-items: stretch;
+      min-height: 420px;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 34px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      border: 1px solid rgba(38, 105, 86, 0.24);
+      border-radius: 999px;
+      padding: 8px 11px;
+      background: rgba(255, 255, 255, 0.62);
+      color: var(--pine-dark);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 720px;
+      margin: 18px 0 16px;
+      font-size: clamp(44px, 7vw, 86px);
+      line-height: 0.93;
+      letter-spacing: 0;
+    }
+
+    .intro {
+      max-width: 660px;
+      margin: 0;
+      color: #44525a;
+      font-size: 19px;
+      line-height: 1.52;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .stat {
+      min-width: 150px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 13px 14px;
+      background: rgba(255, 255, 255, 0.76);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 22px;
+      line-height: 1.1;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .map-panel {
+      position: relative;
+      min-height: 420px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.32), transparent 18% 82%, rgba(255,255,255,0.32)),
+        linear-gradient(135deg, #d9edf4, #ecf4dc 48%, #fff2d7);
+      box-shadow: var(--shadow);
+    }
+
+    .map-panel::before {
+      content: "";
+      position: absolute;
+      inset: 36px 28px;
+      background:
+        linear-gradient(118deg, transparent 0 42%, rgba(45, 111, 143, 0.25) 42% 46%, transparent 46%),
+        linear-gradient(32deg, transparent 0 53%, rgba(174, 91, 61, 0.22) 53% 56%, transparent 56%);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 8px;
+    }
+
+    .map-road {
+      position: absolute;
+      left: 18%;
+      right: 18%;
+      top: 48%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(38, 105, 86, 0.28);
+      transform: rotate(-18deg);
+    }
+
+    .pin {
+      position: absolute;
+      display: grid;
+      gap: 4px;
+      width: 170px;
+      padding: 12px;
+      border: 1px solid rgba(23, 72, 60, 0.15);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 12px 34px rgba(22, 33, 38, 0.13);
+    }
+
+    .pin::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: var(--terracotta);
+      box-shadow: 0 0 0 7px rgba(174, 91, 61, 0.16);
+    }
+
+    .pin strong {
+      font-size: 16px;
+      line-height: 1.1;
+    }
+
+    .pin span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .pin.rental {
+      left: 9%;
+      bottom: 12%;
+    }
+
+    .pin.edenwald {
+      right: 9%;
+      top: 11%;
+    }
+
+    .pin.dinner {
+      right: 15%;
+      bottom: 15%;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 22px 0 18px;
+    }
+
+    .quick-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .quick-card b {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 15px;
+    }
+
+    .quick-card span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .tabs-shell {
+      margin-top: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+      box-shadow: 0 14px 42px rgba(22, 33, 38, 0.08);
+    }
+
+    .tabbar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--line);
+      background: rgba(238, 244, 241, 0.72);
+    }
+
+    .tab-button {
+      appearance: none;
+      border: 0;
+      border-right: 1px solid var(--line);
+      padding: 15px 12px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 850;
+    }
+
+    .tab-button:last-child {
+      border-right: 0;
+    }
+
+    .tab-button[aria-selected="true"] {
+      background: var(--paper);
+      color: var(--pine-dark);
+      box-shadow: inset 0 -4px 0 var(--gold);
+    }
+
+    .day-panel {
+      display: none;
+      padding: 24px;
+    }
+
+    .day-panel.active {
+      display: block;
+    }
+
+    .day-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .day-head h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing: 0;
+    }
+
+    .day-head p {
+      max-width: 520px;
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .event {
+      display: grid;
+      grid-template-columns: 118px minmax(0, 1fr) minmax(220px, 0.42fr);
+      gap: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .event-time {
+      padding: 18px 14px;
+      background: var(--blue-soft);
+      color: #184b60;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .event-body {
+      padding: 16px 0;
+    }
+
+    .event-body h3 {
+      margin: 0 0 7px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    .event-body p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .event-meta {
+      display: grid;
+      align-content: center;
+      gap: 7px;
+      padding: 14px;
+      background: #fbfcfb;
+      border-left: 1px solid var(--line);
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 9px;
+      background: #fff;
+      color: #30404a;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .leave-board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .leave-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: var(--paper);
+    }
+
+    .leave-card h3 {
+      margin: 0 0 11px;
+      font-size: 20px;
+    }
+
+    .leave-item {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 11px;
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .leave-item:first-of-type {
+      border-top: 0;
+    }
+
+    .leave-time {
+      color: var(--terracotta);
+      font-weight: 900;
+    }
+
+    .leave-detail b {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .leave-detail span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .places-section,
+    .notes-section {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .panel h2 {
+      margin: 0 0 14px;
+      font-size: 26px;
+    }
+
+    .place-list,
+    .open-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .place-list li,
+    .open-list li {
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .place-list li:first-child,
+    .open-list li:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .place-list strong,
+    .open-list strong {
+      display: block;
+      color: var(--ink);
+    }
+
+    .sources {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 940px) {
+      .hero,
+      .places-section,
+      .notes-section {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .event {
+        grid-template-columns: 1fr;
+      }
+
+      .event-time {
+        text-align: left;
+      }
+
+      .event-body {
+        padding: 0 16px 4px;
+      }
+
+      .event-meta {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 22px, 1180px);
+        padding-top: 16px;
+      }
+
+      .hero-copy {
+        padding: 16px 0 4px;
+      }
+
+      .map-panel {
+        min-height: 360px;
+      }
+
+      .pin {
+        width: 145px;
+      }
+
+      .quick-grid,
+      .tabbar {
+        grid-template-columns: 1fr;
+      }
+
+      .tab-button {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .tab-button:last-child {
+        border-bottom: 0;
+      }
+
+      .day-panel {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <a class="top-link" href="../../index.html">Back to trips</a>
+
+    <section class="hero" aria-labelledby="trip-title">
+      <div class="hero-copy">
+        <div>
+          <span class="eyebrow">August 21-23, 2026</span>
+          <h1 id="trip-title">Maryland Family Visit</h1>
+          <p class="intro">A practical weekend plan for the Catonsville rental, Edenwald visits, Saturday Mass, family meals, and buffered departure times.</p>
+        </div>
+        <div class="hero-stats" aria-label="Trip summary">
+          <div class="stat"><strong>3 days</strong><span>Friday to Sunday</span></div>
+          <div class="stat"><strong>6+ people</strong><span>Rental and Edenwald groups</span></div>
+          <div class="stat"><strong>45 min</strong><span>Rental to Edenwald with buffer</span></div>
+        </div>
+      </div>
+
+      <div class="map-panel" aria-label="Stylized map of key places">
+        <div class="map-road"></div>
+        <div class="pin rental"><strong>Rental</strong><span>Catonsville area, near I-695</span></div>
+        <div class="pin edenwald"><strong>Edenwald</strong><span>Towson home base for Dad and Maria</span></div>
+        <div class="pin dinner"><strong>Dinner</strong><span>Towson or Cockeysville area</span></div>
+      </div>
+    </section>
+
+    <section class="quick-grid" aria-label="Travel time rules">
+      <div class="quick-card"><b>Rental to Edenwald</b><span>Use 45 minutes door-to-door.</span></div>
+      <div class="quick-card"><b>Rental to Dinner</b><span>Use 50-55 minutes for Cockeysville.</span></div>
+      <div class="quick-card"><b>Edenwald to Dinner</b><span>Use 30-35 minutes.</span></div>
+      <div class="quick-card"><b>Local Errands</b><span>Use 10-15 minutes for Panera or groceries.</span></div>
+    </section>
+
+    <section class="tabs-shell" aria-label="Daily itinerary">
+      <div class="tabbar" role="tablist" aria-label="Trip days">
+        <button class="tab-button" type="button" role="tab" aria-selected="true" aria-controls="friday" id="tab-friday">Friday</button>
+        <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="saturday" id="tab-saturday">Saturday</button>
+        <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="sunday" id="tab-sunday">Sunday</button>
+      </div>
+
+      <article class="day-panel active" id="friday" role="tabpanel" aria-labelledby="tab-friday">
+        <header class="day-head">
+          <div>
+            <h2>Friday, Aug 21</h2>
+            <p>Arrival day: Hal and Stacy see Dad and Maria near Edenwald, then dinner happens back at the Catonsville rental.</p>
+          </div>
+          <span class="chip">Main target: relaxed dinner</span>
+        </header>
+
+        <div class="timeline">
+          <section class="event">
+            <div class="event-time">Morning</div>
+            <div class="event-body">
+              <h3>Hal and Stacy drive to Maryland</h3>
+              <p>They planned to leave in the morning and arrive around noon to see Dad and Maria.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Hal</span><span class="chip">Stacy</span><span class="chip">Edenwald area</span></div>
+          </section>
+
+          <section class="event">
+            <div class="event-time">Noon</div>
+            <div class="event-body">
+              <h3>Lunch near Edenwald</h3>
+              <p>Hal and Stacy grab lunch with Dad and Maria near Edenwald.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Dad</span><span class="chip">Maria</span><span class="chip">Hal/Stacy</span></div>
+          </section>
+
+          <section class="event">
+            <div class="event-time">Afternoon</div>
+            <div class="event-body">
+              <h3>Rental arrival and settling in</h3>
+              <p>Jim and Francine arrive with the dogs, settle into the rental, and get ready for dinner.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Rental group</span><span class="chip">Dogs</span></div>
+          </section>
+
+          <section class="event">
+            <div class="event-time">6:00 pm</div>
+            <div class="event-body">
+              <h3>Dinner at the rental</h3>
+              <p>Invite Dad and Maria to the rental. Takeout nearby is the simplest plan.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Catonsville rental</span><span class="chip">Takeout</span></div>
+          </section>
+        </div>
+
+        <div class="leave-board">
+          <section class="leave-card">
+            <h3>Leave Times</h3>
+            <div class="leave-item"><div class="leave-time">11:45</div><div class="leave-detail"><b>Hal/Stacy arrival target</b><span>Reach Edenwald area by 11:45 am for a noon lunch.</span></div></div>
+            <div class="leave-item"><div class="leave-time">5:15</div><div class="leave-detail"><b>Dad/Maria leave Edenwald</b><span>Arrive at the rental before a 6:00 pm dinner.</span></div></div>
+            <div class="leave-item"><div class="leave-time">5:30</div><div class="leave-detail"><b>Rental group ready</b><span>Be back and settled by 5:30-5:45 pm.</span></div></div>
+          </section>
+        </div>
+      </article>
+
+      <article class="day-panel" id="saturday" role="tabpanel" aria-labelledby="tab-saturday">
+        <header class="day-head">
+          <div>
+            <h2>Saturday, Aug 22</h2>
+            <p>Lunch at the rental, Mass for Dad and Maria, then dinner in the Towson/Cockeysville area.</p>
+          </div>
+          <span class="chip">Anchor: Dad reads at 4:00 pm Mass</span>
+        </header>
+
+        <div class="timeline">
+          <section class="event">
+            <div class="event-time">10:45 am</div>
+            <div class="event-body">
+              <h3>Lunch setup starts</h3>
+              <p>Francine handles grilled sourdough sandwiches; Stacy plans steamed or baked veggies and quinoa. Nearby Giant and HMart can cover missing groceries.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Rental group</span><span class="chip">Kitchen</span></div>
+          </section>
+
+          <section class="event">
+            <div class="event-time">12:00 pm</div>
+            <div class="event-body">
+              <h3>Lunch at the rental</h3>
+              <p>Dad and Maria come over from Edenwald for lunch and time together at the rental.</p>
+            </div>
+            <div class="event-meta"><span class="chip">All six</span><span class="chip">Catonsville</span></div>
+          </section>
+
+          <section class="event">
+            <div class="event-time">2:45 pm</div>
+            <div class="event-body">
+              <h3>Dad and Maria leave for Mass</h3>
+              <p>Dad and Maria go together. Jim and Francine are not joining. Hal and Stacy are still undecided.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Dad</span><span class="chip">Maria</span><span class="chip">Hal/Stacy TBD</span></div>
+          </section>
+
+          <section class="event">
+            <div class="event-time">6:30 pm</div>
+            <div class="event-body">
+              <h3>Dinner in Towson/Cockeysville</h3>
+              <p>Indian Ocean in Cockeysville is the leading candidate. Dad suggested it; Stacy planned to check food restrictions.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Indian Ocean candidate</span><span class="chip">Roeths possible</span></div>
+          </section>
+        </div>
+
+        <div class="leave-board">
+          <section class="leave-card">
+            <h3>Leave Times</h3>
+            <div class="leave-item"><div class="leave-time">11:15</div><div class="leave-detail"><b>Dad/Maria leave Edenwald</b><span>Arrive at rental for noon lunch.</span></div></div>
+            <div class="leave-item"><div class="leave-time">2:45</div><div class="leave-detail"><b>Dad/Maria leave rental</b><span>Comfortably make 4:00 pm Mass.</span></div></div>
+            <div class="leave-item"><div class="leave-time">5:35</div><div class="leave-detail"><b>Rental group leaves</b><span>Use 5:35-5:45 pm for a 6:30 pm Cockeysville dinner.</span></div></div>
+            <div class="leave-item"><div class="leave-time">5:55</div><div class="leave-detail"><b>Edenwald/Mass group leaves</b><span>Use 5:55-6:05 pm for a 6:30 pm Cockeysville dinner.</span></div></div>
+          </section>
+        </div>
+      </article>
+
+      <article class="day-panel" id="sunday" role="tabpanel" aria-labelledby="tab-sunday">
+        <header class="day-head">
+          <div>
+            <h2>Sunday, Aug 23</h2>
+            <p>Breakfast is the maybe-plan. The deciding factor is dog meds, packing, and whether checkout is 10:00 or 11:00.</p>
+          </div>
+          <span class="chip">Main question: checkout time</span>
+        </header>
+
+        <div class="timeline">
+          <section class="event">
+            <div class="event-time">7:00 am</div>
+            <div class="event-body">
+              <h3>Dogs, meds, packing</h3>
+              <p>Francine estimated this takes real time. If checkout is 10:00 am, breakfast may be too tight for Jim and Francine.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Jim</span><span class="chip">Francine</span><span class="chip">Dogs</span></div>
+          </section>
+
+          <section class="event">
+            <div class="event-time">8:30 am</div>
+            <div class="event-body">
+              <h3>Possible Panera breakfast</h3>
+              <p>Original plan was breakfast with Dad and Maria at a local Panera, then everyone heads home.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Optional</span><span class="chip">Catonsville Panera</span></div>
+          </section>
+
+          <section class="event">
+            <div class="event-time">10 or 11</div>
+            <div class="event-body">
+              <h3>Checkout</h3>
+              <p>Confirm whether checkout is 10:00 am or 11:00 am. This changes whether breakfast is realistic.</p>
+            </div>
+            <div class="event-meta"><span class="chip">Open item</span><span class="chip">Rental</span></div>
+          </section>
+        </div>
+
+        <div class="leave-board">
+          <section class="leave-card">
+            <h3>Leave Times</h3>
+            <div class="leave-item"><div class="leave-time">7:45</div><div class="leave-detail"><b>Dad/Maria leave Edenwald</b><span>For an 8:30 am Panera breakfast in Catonsville.</span></div></div>
+            <div class="leave-item"><div class="leave-time">8:15</div><div class="leave-detail"><b>Rental group leaves</b><span>For an 8:30 am nearby breakfast.</span></div></div>
+            <div class="leave-item"><div class="leave-time">9:30</div><div class="leave-detail"><b>Leave Panera if 11:00 checkout</b><span>Use 9:30-9:45 am as the latest comfortable exit.</span></div></div>
+          </section>
+        </div>
+      </article>
+    </section>
+
+    <section class="places-section">
+      <div class="panel">
+        <h2>People</h2>
+        <ul class="place-list">
+          <li><strong>Rental group</strong>Jim, Francine, Hal, and Stacy stay together at the Catonsville-area rental.</li>
+          <li><strong>Edenwald group</strong>Dad and Maria are based at Edenwald and go to Mass together.</li>
+          <li><strong>Dinner guests</strong>Aunt Linda and Uncle Milton / the Roeths may join Saturday dinner.</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h2>Places</h2>
+        <ul class="place-list">
+          <li><strong>Catonsville rental</strong>Exact address still needed; planned as the main hangout and meal base.</li>
+          <li><strong>Edenwald</strong>800 Southerly Road, Towson, MD 21286.</li>
+          <li><strong>Indian Ocean</strong>11121 York Road, Cockeysville, MD 21030. Saturday dinner candidate.</li>
+          <li><strong>Catonsville Gourmet</strong>829 Frederick Road, Catonsville, MD 21228. Takeout candidate.</li>
+          <li><strong>Panera</strong>6600 Baltimore National Pike, Catonsville, MD 21228. Sunday breakfast candidate.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="notes-section">
+      <div class="panel">
+        <h2>Open Items</h2>
+        <ul class="open-list">
+          <li><strong>Rental details</strong>Exact address, check-in time, checkout time, and parking.</li>
+          <li><strong>Mass plan</strong>Whether Hal and Stacy will attend with Dad and Maria.</li>
+          <li><strong>Dinner</strong>Restaurant, reservation time, headcount, and food accommodations.</li>
+          <li><strong>Sunday</strong>Whether breakfast happens for everyone or only some people.</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h2>Planning Notes</h2>
+        <ul class="open-list">
+          <li><strong>Buffer style</strong>Times include a family-friendly cushion for parking, loading, stairs, dogs, elevators, and general friction.</li>
+          <li><strong>Dog logistics</strong>Sunday morning is the tightest because meds, packing, and checkout stack together.</li>
+          <li><strong>Food logistics</strong>Rental is reportedly near Giant and HMart, which helps keep Saturday lunch flexible.</li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="sources">Address checks: Edenwald contact page, Indian Ocean official site, Catonsville Gourmet official site, and Panera location page. Travel times are approximate planning buffers based on conversation estimates, not live traffic.</p>
+  </main>
+
+  <script>
+    const buttons = Array.from(document.querySelectorAll(".tab-button"));
+    const panels = Array.from(document.querySelectorAll(".day-panel"));
+
+    function selectTab(button) {
+      buttons.forEach((item) => item.setAttribute("aria-selected", String(item === button)));
+      panels.forEach((panel) => panel.classList.toggle("active", panel.id === button.getAttribute("aria-controls")));
+    }
+
+    buttons.forEach((button, index) => {
+      button.addEventListener("click", () => selectTab(button));
+      button.addEventListener("keydown", (event) => {
+        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
+          return;
+        }
+        event.preventDefault();
+        let nextIndex = index;
+        if (event.key === "ArrowRight") nextIndex = (index + 1) % buttons.length;
+        if (event.key === "ArrowLeft") nextIndex = (index - 1 + buttons.length) % buttons.length;
+        if (event.key === "Home") nextIndex = 0;
+        if (event.key === "End") nextIndex = buttons.length - 1;
+        buttons[nextIndex].focus();
+        selectTab(buttons[nextIndex]);
+      });
+    });
+  </script>
+</body>
+</html>

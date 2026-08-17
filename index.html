@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Travel Plans</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172026;
+      --muted: #5d6972;
+      --line: #d9e1e6;
+      --paper: #fbfcfb;
+      --leaf: #357a64;
+      --clay: #a45334;
+      --sky: #dceff5;
+      --gold: #f1c45b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(241, 196, 91, 0.25), transparent 28rem),
+        linear-gradient(135deg, #eef6f2 0%, #fbfcfb 50%, #f7eee7 100%);
+      color: var(--ink);
+    }
+
+    main {
+      width: min(1040px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 56px 0;
+    }
+
+    .masthead {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: end;
+      padding-bottom: 34px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(42px, 8vw, 84px);
+      line-height: 0.92;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 520px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .route-mark {
+      min-height: 210px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, transparent 48%, rgba(53, 122, 100, 0.15) 48%, rgba(53, 122, 100, 0.15) 52%, transparent 52%),
+        linear-gradient(135deg, var(--sky), #fff8e6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .route-mark::before,
+    .route-mark::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: var(--leaf);
+      box-shadow: 0 0 0 8px rgba(53, 122, 100, 0.13);
+    }
+
+    .route-mark::before {
+      width: 18px;
+      height: 18px;
+      left: 18%;
+      top: 58%;
+    }
+
+    .route-mark::after {
+      width: 24px;
+      height: 24px;
+      right: 20%;
+      top: 30%;
+      background: var(--clay);
+      box-shadow: 0 0 0 8px rgba(164, 83, 52, 0.14);
+    }
+
+    .route-label {
+      position: absolute;
+      left: 22px;
+      bottom: 20px;
+      right: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .trip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .trip-card {
+      display: grid;
+      gap: 14px;
+      min-height: 250px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.76);
+      color: inherit;
+      text-decoration: none;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .trip-card:hover,
+    .trip-card:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(53, 122, 100, 0.55);
+      box-shadow: 0 18px 45px rgba(23, 32, 38, 0.12);
+      outline: none;
+    }
+
+    .trip-kicker {
+      color: var(--clay);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .trip-card h2 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.06;
+      letter-spacing: 0;
+    }
+
+    .trip-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .trip-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: #fff;
+      color: #31414b;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 780px) {
+      main {
+        width: min(100% - 28px, 1040px);
+        padding: 34px 0;
+      }
+
+      .masthead {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="masthead" aria-labelledby="page-title">
+      <div>
+        <h1 id="page-title">Travel Plans</h1>
+        <p class="subtitle">A home base for trip pages, day plans, departure windows, people, places, and the little timing details that keep a family visit from turning into calendar soup.</p>
+      </div>
+      <div class="route-mark" aria-label="Decorative route marker showing a simple travel path">
+        <div class="route-label">
+          <span>Start</span>
+          <span>Arrive</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="trip-grid" aria-label="Trips">
+      <a class="trip-card" href="trips/maryland-family-aug-2026/">
+        <span class="trip-kicker">Aug 21-23, 2026</span>
+        <h2>Maryland Family Visit</h2>
+        <p>Catonsville rental, Edenwald visits, Saturday lunch, Mass timing, and a possible Cockeysville dinner plan.</p>
+        <div class="trip-meta">
+          <span class="pill">3 days</span>
+          <span class="pill">Catonsville</span>
+          <span class="pill">Family plan</span>
+        </div>
+      </a>
+    </section>
+  </main>
+</body>
+</html>
