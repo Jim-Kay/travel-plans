@@ -4,12 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Maryland Family Visit</title>
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIINfQhFxnx4oI5HdCcK6quJZ3YF7LR1vA="
-    crossorigin=""
-  >
+  <link rel="stylesheet" href="assets/leaflet/leaflet.css">
   <style>
     :root {
       color-scheme: light;
@@ -191,7 +186,7 @@
 
     .map-panel {
       position: relative;
-      min-height: 360px;
+      height: clamp(320px, 44vw, 500px);
       border: 1px solid var(--line);
       border-radius: 8px;
       overflow: hidden;
@@ -199,10 +194,9 @@
       box-shadow: 0 14px 42px rgba(22, 33, 38, 0.09);
     }
 
-    .map-panel .leaflet-container {
+    .map-panel.leaflet-container {
       width: 100%;
       height: 100%;
-      min-height: 360px;
       font: inherit;
     }
 
@@ -220,6 +214,22 @@
     .map-panel .leaflet-popup-content a {
       color: var(--terracotta);
       font-weight: 800;
+    }
+
+    .map-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: var(--muted);
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .map-panel.leaflet-container .map-fallback {
+      display: none;
     }
 
     .map-notes {
@@ -576,9 +586,8 @@
 
       .hero-art,
       .hero-art img,
-      .map-panel,
-      .map-panel .leaflet-container {
-        min-height: 360px;
+      .map-panel {
+        height: 320px;
       }
 
       .quick-grid,
@@ -636,7 +645,9 @@
     </section>
 
     <section class="route-map-section" aria-label="Actual weekend map and map links">
-      <div class="map-panel" id="weekend-map" aria-label="Map showing rental, Edenwald, dinner, takeout, and breakfast locations"></div>
+      <div class="map-panel" id="weekend-map" aria-label="Map showing rental, Edenwald, dinner, takeout, and breakfast locations">
+        <div class="map-fallback">Loading the map. If it does not appear, use the map links beside it.</div>
+      </div>
       <aside class="map-notes">
         <h2>Weekend Map</h2>
         <p>Actual map points for the key places. Use the schedule below for day-by-day timing.</p>
@@ -866,11 +877,7 @@
     <p class="sources">Address checks: Edenwald contact page, Indian Ocean official site, Catonsville Gourmet official site, and Panera location page. Map tiles use OpenStreetMap; coordinates were geocoded from the listed addresses for planning. Allocated travel times are estimated drive times plus planning buffer, not live traffic.</p>
   </main>
 
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""
-  ></script>
+  <script src="assets/leaflet/leaflet.js"></script>
   <script>
     const places = [
       {
@@ -925,6 +932,7 @@
       });
 
       weekendMap.fitBounds(bounds, { padding: [28, 28] });
+      setTimeout(() => weekendMap.invalidateSize(), 200);
     }
 
     const buttons = Array.from(document.querySelectorAll(".tab-button"));
