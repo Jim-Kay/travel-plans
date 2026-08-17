@@ -19,12 +19,13 @@ Places
 - Sunday breakfast candidate: Panera, 6600 Baltimore National Pike, Catonsville, MD 21228
 - Nearby groceries mentioned: Giant and HMart near the rental
 
-Travel Time Rules With Buffer
-- Rental to Edenwald: plan 45 minutes door-to-door
-- Edenwald to rental: plan 45 minutes door-to-door
-- Rental to Indian Ocean / Cockeysville: plan 50-55 minutes door-to-door
-- Edenwald to Indian Ocean / Cockeysville: plan 30-35 minutes door-to-door
-- Rental to nearby Panera / groceries: plan 10-15 minutes door-to-door
+Allocated Travel Times
+These are planning allocations: estimated drive time plus buffer for parking, loading, elevators, dogs, and family logistics.
+- Rental to Edenwald: allocate 45 minutes door-to-door
+- Edenwald to rental: allocate 45 minutes door-to-door
+- Rental to Indian Ocean / Cockeysville: allocate 50-55 minutes door-to-door
+- Edenwald to Indian Ocean / Cockeysville: allocate 30-35 minutes door-to-door
+- Rental to nearby Panera / groceries: allocate 10-15 minutes door-to-door
 
 Friday, August 21
 - Hal and Stacy plan to leave in the morning and arrive in Maryland around noon.

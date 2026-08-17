@@ -304,9 +304,19 @@
     }
 
     .quick-card span {
+      display: block;
       color: var(--muted);
       font-size: 13px;
       line-height: 1.4;
+    }
+
+    .quick-card small {
+      display: block;
+      margin-top: 7px;
+      color: var(--terracotta);
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.25;
     }
 
     .tabs-shell {
@@ -642,10 +652,10 @@
     </section>
 
     <section class="quick-grid" aria-label="Travel time rules">
-      <div class="quick-card"><b>Rental to Edenwald</b><span>Use 45 minutes door-to-door.</span></div>
-      <div class="quick-card"><b>Rental to Dinner</b><span>Use 50-55 minutes for Cockeysville.</span></div>
-      <div class="quick-card"><b>Edenwald to Dinner</b><span>Use 30-35 minutes.</span></div>
-      <div class="quick-card"><b>Local Errands</b><span>Use 10-15 minutes for Panera or groceries.</span></div>
+      <div class="quick-card"><b>Rental to Edenwald</b><span>Allocate 45 minutes door-to-door.</span><small>Estimated drive + buffer</small></div>
+      <div class="quick-card"><b>Rental to Dinner</b><span>Allocate 50-55 minutes for Cockeysville.</span><small>Estimated drive + buffer</small></div>
+      <div class="quick-card"><b>Edenwald to Dinner</b><span>Allocate 30-35 minutes.</span><small>Estimated drive + buffer</small></div>
+      <div class="quick-card"><b>Local Errands</b><span>Allocate 10-15 minutes for Panera or groceries.</span><small>Estimated drive + buffer</small></div>
     </section>
 
     <section class="route-map-section" aria-label="Illustrated route map and map notes">
@@ -881,7 +891,7 @@
       </div>
     </section>
 
-    <p class="sources">Address checks: Edenwald contact page, Indian Ocean official site, Catonsville Gourmet official site, and Panera location page. Travel times are approximate planning buffers based on conversation estimates, not live traffic.</p>
+    <p class="sources">Address checks: Edenwald contact page, Indian Ocean official site, Catonsville Gourmet official site, and Panera location page. Allocated travel times are estimated drive times plus planning buffer, not live traffic.</p>
   </main>
 
   <script>
