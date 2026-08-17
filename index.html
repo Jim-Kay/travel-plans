@@ -122,13 +122,28 @@
       display: grid;
       gap: 14px;
       min-height: 250px;
-      padding: 24px;
+      padding: 0;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.76);
       color: inherit;
       text-decoration: none;
+      overflow: hidden;
       transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .trip-card-body {
+      display: grid;
+      gap: 14px;
+      padding: 22px 24px 24px;
+    }
+
+    .trip-image {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      object-fit: cover;
+      border-bottom: 1px solid var(--line);
     }
 
     .trip-card:hover,
@@ -206,13 +221,16 @@
 
     <section class="trip-grid" aria-label="Trips">
       <a class="trip-card" href="trips/maryland-family-aug-2026/">
-        <span class="trip-kicker">Aug 21-23, 2026</span>
-        <h2>Maryland Family Visit</h2>
-        <p>Catonsville rental, Edenwald visits, Saturday lunch, Mass timing, and a possible Cockeysville dinner plan.</p>
-        <div class="trip-meta">
-          <span class="pill">3 days</span>
-          <span class="pill">Catonsville</span>
-          <span class="pill">Family plan</span>
+        <img class="trip-image" src="trips/maryland-family-aug-2026/assets/rental-arrival.webp" alt="Illustration of a family arriving at a warm suburban rental house">
+        <div class="trip-card-body">
+          <span class="trip-kicker">Aug 21-23, 2026</span>
+          <h2>Maryland Family Visit</h2>
+          <p>Catonsville rental, Edenwald visits, Saturday lunch, Mass timing, and a possible Cockeysville dinner plan.</p>
+          <div class="trip-meta">
+            <span class="pill">3 days</span>
+            <span class="pill">Catonsville</span>
+            <span class="pill">Family plan</span>
+          </div>
         </div>
       </a>
     </section>
