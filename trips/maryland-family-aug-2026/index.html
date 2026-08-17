@@ -4,6 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Maryland Family Visit</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIINfQhFxnx4oI5HdCcK6quJZ3YF7LR1vA="
+    crossorigin=""
+  >
   <style>
     :root {
       color-scheme: light;
@@ -193,50 +199,27 @@
       box-shadow: 0 14px 42px rgba(22, 33, 38, 0.09);
     }
 
-    .map-panel img {
-      display: block;
+    .map-panel .leaflet-container {
       width: 100%;
       height: 100%;
       min-height: 360px;
-      object-fit: cover;
+      font: inherit;
     }
 
-    .map-label {
-      position: absolute;
-      display: grid;
-      gap: 3px;
-      width: min(210px, 30%);
-      border: 1px solid rgba(174, 91, 61, 0.22);
-      border-radius: 8px;
-      padding: 10px 12px;
-      background: rgba(255, 253, 248, 0.9);
-      box-shadow: 0 10px 26px rgba(22, 33, 38, 0.12);
+    .map-panel .leaflet-popup-content {
+      margin: 12px 14px;
+      line-height: 1.35;
     }
 
-    .map-label strong {
+    .map-panel .leaflet-popup-content strong {
+      display: block;
+      margin-bottom: 4px;
       color: var(--pine-dark);
-      line-height: 1.1;
     }
 
-    .map-label span {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.3;
-    }
-
-    .map-label.rental {
-      left: 6%;
-      top: 9%;
-    }
-
-    .map-label.edenwald {
-      right: 5%;
-      top: 11%;
-    }
-
-    .map-label.dinner {
-      left: 38%;
-      bottom: 8%;
+    .map-panel .leaflet-popup-content a {
+      color: var(--terracotta);
+      font-weight: 800;
     }
 
     .map-notes {
@@ -258,29 +241,27 @@
       line-height: 1.45;
     }
 
-    .map-note-list {
+    .map-actions {
       display: grid;
-      gap: 8px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
+      gap: 9px;
     }
 
-    .map-note-list li {
-      border-top: 1px solid var(--line);
-      padding-top: 8px;
-      color: var(--muted);
-      line-height: 1.38;
+    .map-action {
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: #fff;
+      color: var(--pine-dark);
       font-size: 14px;
+      font-weight: 850;
+      text-decoration: none;
     }
 
-    .map-note-list li:first-child {
-      border-top: 0;
-      padding-top: 0;
-    }
-
-    .map-note-list strong {
-      color: var(--ink);
+    .map-action:hover,
+    .map-action:focus-visible {
+      border-color: rgba(38, 105, 86, 0.45);
+      outline: none;
     }
 
     .quick-grid {
@@ -596,12 +577,8 @@
       .hero-art,
       .hero-art img,
       .map-panel,
-      .map-panel img {
+      .map-panel .leaflet-container {
         min-height: 360px;
-      }
-
-      .map-label {
-        width: min(190px, 44%);
       }
 
       .quick-grid,
@@ -658,21 +635,16 @@
       <div class="quick-card"><b>Local Errands</b><span>Allocate 10-15 minutes for Panera or groceries.</span><small>Estimated drive + buffer</small></div>
     </section>
 
-    <section class="route-map-section" aria-label="Illustrated route map and map notes">
-      <div class="map-panel">
-        <img src="assets/route-map.webp" alt="Illustrated route map connecting the rental, Edenwald, and dinner area">
-        <div class="map-label rental"><strong>Rental</strong><span>4 Dunbar Ave, Catonsville</span></div>
-        <div class="map-label edenwald"><strong>Edenwald</strong><span>Dad and Maria's home base in Towson</span></div>
-        <div class="map-label dinner"><strong>Dinner</strong><span>Towson or Cockeysville area</span></div>
-      </div>
+    <section class="route-map-section" aria-label="Actual weekend map and map links">
+      <div class="map-panel" id="weekend-map" aria-label="Map showing rental, Edenwald, dinner, takeout, and breakfast locations"></div>
       <aside class="map-notes">
         <h2>Weekend Map</h2>
-        <p>This is a planning map, not a live navigation map. It keeps the three important zones visible around the Catonsville rental, Edenwald, and the likely dinner area.</p>
-        <ul class="map-note-list">
-          <li><strong>Friday:</strong> Edenwald to rental for dinner: leave by 5:15 pm.</li>
-          <li><strong>Saturday:</strong> Rental to Mass return window starts around 2:45 pm.</li>
-          <li><strong>Dinner:</strong> Rental group leaves 5:35-5:45 pm for a 6:30 pm Cockeysville dinner.</li>
-        </ul>
+        <p>Actual map points for the key places. Use the schedule below for day-by-day timing.</p>
+        <div class="map-actions" aria-label="Map links">
+          <a class="map-action" href="https://www.google.com/maps/search/?api=1&query=4%20Dunbar%20Ave%2C%20Catonsville%2C%20MD%2021228" target="_blank" rel="noopener">Open rental in maps</a>
+          <a class="map-action" href="https://www.google.com/maps/dir/?api=1&origin=4%20Dunbar%20Ave%2C%20Catonsville%2C%20MD%2021228&destination=800%20Southerly%20Rd%2C%20Towson%2C%20MD%2021286" target="_blank" rel="noopener">Directions: rental to Edenwald</a>
+          <a class="map-action" href="https://www.google.com/maps/dir/?api=1&origin=4%20Dunbar%20Ave%2C%20Catonsville%2C%20MD%2021228&destination=11121%20York%20Rd%2C%20Cockeysville%2C%20MD%2021030" target="_blank" rel="noopener">Directions: rental to Indian Ocean</a>
+        </div>
       </aside>
     </section>
 
@@ -891,10 +863,70 @@
       </div>
     </section>
 
-    <p class="sources">Address checks: Edenwald contact page, Indian Ocean official site, Catonsville Gourmet official site, and Panera location page. Allocated travel times are estimated drive times plus planning buffer, not live traffic.</p>
+    <p class="sources">Address checks: Edenwald contact page, Indian Ocean official site, Catonsville Gourmet official site, and Panera location page. Map tiles use OpenStreetMap; coordinates were geocoded from the listed addresses for planning. Allocated travel times are estimated drive times plus planning buffer, not live traffic.</p>
   </main>
 
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
   <script>
+    const places = [
+      {
+        name: "Rental",
+        details: "4 Dunbar Ave, Catonsville, MD 21228",
+        coordinates: [39.2824627, -76.7489101],
+        url: "https://www.google.com/maps/search/?api=1&query=4%20Dunbar%20Ave%2C%20Catonsville%2C%20MD%2021228"
+      },
+      {
+        name: "Edenwald",
+        details: "800 Southerly Rd, Towson, MD 21286",
+        coordinates: [39.4063716, -76.5972103],
+        url: "https://www.google.com/maps/search/?api=1&query=800%20Southerly%20Rd%2C%20Towson%2C%20MD%2021286"
+      },
+      {
+        name: "Indian Ocean",
+        details: "11121 York Rd, Cockeysville, MD 21030",
+        coordinates: [39.4910476, -76.6463841],
+        url: "https://www.google.com/maps/search/?api=1&query=11121%20York%20Rd%2C%20Cockeysville%2C%20MD%2021030"
+      },
+      {
+        name: "Catonsville Gourmet",
+        details: "829 Frederick Rd, Catonsville, MD 21228",
+        coordinates: [39.2710185, -76.7350261],
+        url: "https://www.google.com/maps/search/?api=1&query=829%20Frederick%20Rd%2C%20Catonsville%2C%20MD%2021228"
+      },
+      {
+        name: "Panera",
+        details: "6600 Baltimore National Pike, Catonsville, MD 21228",
+        coordinates: [39.2882937, -76.7645931],
+        url: "https://www.google.com/maps/search/?api=1&query=6600%20Baltimore%20National%20Pike%2C%20Catonsville%2C%20MD%2021228"
+      }
+    ];
+
+    const mapElement = document.getElementById("weekend-map");
+    if (mapElement && window.L) {
+      const weekendMap = L.map(mapElement, {
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(weekendMap);
+
+      const bounds = L.latLngBounds(places.map((place) => place.coordinates));
+      places.forEach((place) => {
+        L.marker(place.coordinates)
+          .addTo(weekendMap)
+          .bindPopup(`<strong>${place.name}</strong><br>${place.details}<br><a href="${place.url}" target="_blank" rel="noopener">Open in maps</a>`);
+      });
+
+      weekendMap.fitBounds(bounds, { padding: [28, 28] });
+    }
+
     const buttons = Array.from(document.querySelectorAll(".tab-button"));
     const panels = Array.from(document.querySelectorAll(".day-panel"));
 
