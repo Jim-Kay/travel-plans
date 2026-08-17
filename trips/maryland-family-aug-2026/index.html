@@ -40,6 +40,7 @@
         linear-gradient(115deg, rgba(220, 239, 245, 0.85), rgba(255, 253, 248, 0.82) 46%, rgba(246, 222, 210, 0.72)),
         repeating-linear-gradient(45deg, rgba(38, 105, 86, 0.04) 0 1px, transparent 1px 18px);
       color: var(--ink);
+      overflow-x: hidden;
     }
 
     a {
@@ -266,6 +267,7 @@
       font-size: 14px;
       font-weight: 850;
       text-decoration: none;
+      overflow-wrap: anywhere;
     }
 
     .map-action:hover,
@@ -348,6 +350,45 @@
       box-shadow: inset 0 -4px 0 var(--gold);
     }
 
+    .person-filter {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfb;
+    }
+
+    .filter-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .filter-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .filter-button[aria-pressed="true"] {
+      border-color: var(--pine);
+      background: var(--pine);
+      color: #fff;
+    }
+
     .day-panel {
       display: none;
       padding: 24px;
@@ -407,8 +448,16 @@
       padding: 16px 0;
     }
 
+    .event-title {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 7px;
+    }
+
     .event-body h3 {
-      margin: 0 0 7px;
+      margin: 0;
       font-size: 20px;
       letter-spacing: 0;
     }
@@ -417,6 +466,53 @@
       margin: 0;
       color: var(--muted);
       line-height: 1.45;
+    }
+
+    .person-dots {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 4px;
+      max-width: 190px;
+      padding-top: 1px;
+    }
+
+    .person-dot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 1px 4px rgba(22, 33, 38, 0.16);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 0;
+    }
+
+    .person-dot.d { background: #2d6f8f; }
+    .person-dot.m { background: #ae5b3d; }
+    .person-dot.jk { background: #266956; }
+    .person-dot.fk { background: #8f5db7; }
+    .person-dot.hk { background: #c28a20; }
+    .person-dot.sk { background: #d4576f; }
+
+    .filter-empty {
+      display: none;
+      margin: 18px 0 0;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fff;
+      color: var(--muted);
+      font-weight: 750;
+    }
+
+    .filter-empty.active {
+      display: block;
     }
 
     .event-meta {
@@ -568,6 +664,10 @@
         padding: 0 16px 4px;
       }
 
+      .event-title {
+        align-items: flex-start;
+      }
+
       .event-meta {
         border-left: 0;
         border-top: 1px solid var(--line);
@@ -582,6 +682,12 @@
 
       .hero-copy {
         padding: 16px 0 4px;
+      }
+
+      h1 {
+        max-width: 9ch;
+        font-size: 40px;
+        line-height: 1;
       }
 
       .hero-art,
@@ -606,6 +712,36 @@
 
       .day-panel {
         padding: 16px;
+      }
+
+      .day-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .person-filter {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 12px;
+      }
+
+      .filter-button {
+        width: 100%;
+        min-width: 0;
+        justify-content: center;
+      }
+
+      .filter-label {
+        flex: 1 0 100%;
+      }
+
+      .event-title {
+        flex-direction: column;
+      }
+
+      .person-dots {
+        justify-content: flex-start;
+        max-width: 100%;
       }
     }
   </style>
@@ -666,6 +802,17 @@
         <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="sunday" id="tab-sunday">Sunday</button>
       </div>
 
+      <div class="person-filter" aria-label="Filter itinerary by person">
+        <span class="filter-label">Filter</span>
+        <button class="filter-button" type="button" data-person="all" aria-pressed="true">All</button>
+        <button class="filter-button" type="button" data-person="d" aria-pressed="false"><span class="person-dot d" aria-hidden="true">D</span><span>Dad</span></button>
+        <button class="filter-button" type="button" data-person="m" aria-pressed="false"><span class="person-dot m" aria-hidden="true">M</span><span>Maria</span></button>
+        <button class="filter-button" type="button" data-person="jk" aria-pressed="false"><span class="person-dot jk" aria-hidden="true">JK</span><span>Jim</span></button>
+        <button class="filter-button" type="button" data-person="fk" aria-pressed="false"><span class="person-dot fk" aria-hidden="true">FK</span><span>Francine</span></button>
+        <button class="filter-button" type="button" data-person="hk" aria-pressed="false"><span class="person-dot hk" aria-hidden="true">HK</span><span>Hal</span></button>
+        <button class="filter-button" type="button" data-person="sk" aria-pressed="false"><span class="person-dot sk" aria-hidden="true">SK</span><span>Stacy</span></button>
+      </div>
+
       <article class="day-panel active" id="friday" role="tabpanel" aria-labelledby="tab-friday">
         <header class="day-head">
           <div>
@@ -676,42 +823,55 @@
         </header>
 
         <div class="timeline">
-          <section class="event">
+          <section class="event" data-people="hk sk">
             <div class="event-time">Morning</div>
             <div class="event-body">
-              <h3>Hal and Stacy drive to Maryland</h3>
+              <div class="event-title">
+                <h3>Hal and Stacy drive to Maryland</h3>
+                <div class="person-dots" aria-label="People: Hal, Stacy"><span class="person-dot hk" title="Hal">HK</span><span class="person-dot sk" title="Stacy">SK</span></div>
+              </div>
               <p>They planned to leave in the morning and arrive around noon to see Dad and Maria.</p>
             </div>
             <div class="event-meta"><span class="chip">Hal</span><span class="chip">Stacy</span><span class="chip">Edenwald area</span></div>
           </section>
 
-          <section class="event">
+          <section class="event" data-people="d m hk sk">
             <div class="event-time">Noon</div>
             <div class="event-body">
-              <h3>Lunch near Edenwald</h3>
+              <div class="event-title">
+                <h3>Lunch near Edenwald</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria, Hal, Stacy"><span class="person-dot d" title="Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot hk" title="Hal">HK</span><span class="person-dot sk" title="Stacy">SK</span></div>
+              </div>
               <p>Hal and Stacy grab lunch with Dad and Maria near Edenwald.</p>
             </div>
             <div class="event-meta"><span class="chip">Dad</span><span class="chip">Maria</span><span class="chip">Hal/Stacy</span></div>
           </section>
 
-          <section class="event">
+          <section class="event" data-people="jk fk hk sk">
             <div class="event-time">4:00 pm</div>
             <div class="event-body">
-              <h3>Rental check-in opens</h3>
+              <div class="event-title">
+                <h3>Rental check-in opens</h3>
+                <div class="person-dots" aria-label="People: Jim, Francine, Hal, Stacy"><span class="person-dot jk" title="Jim">JK</span><span class="person-dot fk" title="Francine">FK</span><span class="person-dot hk" title="Hal">HK</span><span class="person-dot sk" title="Stacy">SK</span></div>
+              </div>
               <p>Check-in is no earlier than 4:00 pm. Jim and Francine arrive with the dogs, settle into the rental, and get ready for dinner.</p>
             </div>
             <div class="event-meta"><span class="chip">No earlier than 4:00</span><span class="chip">Dogs</span></div>
           </section>
 
-          <section class="event">
+          <section class="event" data-people="d m jk fk hk sk">
             <div class="event-time">6:00 pm</div>
             <div class="event-body">
-              <h3>Dinner at the rental</h3>
+              <div class="event-title">
+                <h3>Dinner at the rental</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria, Jim, Francine, Hal, Stacy"><span class="person-dot d" title="Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot jk" title="Jim">JK</span><span class="person-dot fk" title="Francine">FK</span><span class="person-dot hk" title="Hal">HK</span><span class="person-dot sk" title="Stacy">SK</span></div>
+              </div>
               <p>Invite Dad and Maria to the rental. Takeout nearby is the simplest plan.</p>
             </div>
             <div class="event-meta"><span class="chip">Catonsville rental</span><span class="chip">Takeout</span></div>
           </section>
         </div>
+        <p class="filter-empty">No Friday itinerary items match this person.</p>
 
         <div class="leave-board">
           <section class="leave-card">
@@ -734,42 +894,55 @@
         </header>
 
         <div class="timeline">
-          <section class="event">
+          <section class="event" data-people="jk fk hk sk">
             <div class="event-time">10:45 am</div>
             <div class="event-body">
-              <h3>Lunch setup starts</h3>
+              <div class="event-title">
+                <h3>Lunch setup starts</h3>
+                <div class="person-dots" aria-label="People: Jim, Francine, Hal, Stacy"><span class="person-dot jk" title="Jim">JK</span><span class="person-dot fk" title="Francine">FK</span><span class="person-dot hk" title="Hal">HK</span><span class="person-dot sk" title="Stacy">SK</span></div>
+              </div>
               <p>Francine handles grilled sourdough sandwiches; Stacy plans steamed or baked veggies and quinoa. Nearby Giant and HMart can cover missing groceries.</p>
             </div>
             <div class="event-meta"><span class="chip">Rental group</span><span class="chip">Kitchen</span></div>
           </section>
 
-          <section class="event">
+          <section class="event" data-people="d m jk fk hk sk">
             <div class="event-time">12:00 pm</div>
             <div class="event-body">
-              <h3>Lunch at the rental</h3>
+              <div class="event-title">
+                <h3>Lunch at the rental</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria, Jim, Francine, Hal, Stacy"><span class="person-dot d" title="Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot jk" title="Jim">JK</span><span class="person-dot fk" title="Francine">FK</span><span class="person-dot hk" title="Hal">HK</span><span class="person-dot sk" title="Stacy">SK</span></div>
+              </div>
               <p>Dad and Maria come over from Edenwald for lunch and time together at the rental.</p>
             </div>
             <div class="event-meta"><span class="chip">All six</span><span class="chip">Catonsville</span></div>
           </section>
 
-          <section class="event">
+          <section class="event" data-people="d m hk sk">
             <div class="event-time">2:45 pm</div>
             <div class="event-body">
-              <h3>Dad and Maria leave for Mass</h3>
+              <div class="event-title">
+                <h3>Dad and Maria leave for Mass</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria; Hal and Stacy undecided"><span class="person-dot d" title="Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot hk" title="Hal, TBD">HK</span><span class="person-dot sk" title="Stacy, TBD">SK</span></div>
+              </div>
               <p>Dad and Maria go together. Jim and Francine are not joining. Hal and Stacy are still undecided.</p>
             </div>
             <div class="event-meta"><span class="chip">Dad</span><span class="chip">Maria</span><span class="chip">Hal/Stacy TBD</span></div>
           </section>
 
-          <section class="event">
+          <section class="event" data-people="d m jk fk hk sk">
             <div class="event-time">6:30 pm</div>
             <div class="event-body">
-              <h3>Dinner in Towson/Cockeysville</h3>
+              <div class="event-title">
+                <h3>Dinner in Towson/Cockeysville</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria, Jim, Francine, Hal, Stacy"><span class="person-dot d" title="Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot jk" title="Jim">JK</span><span class="person-dot fk" title="Francine">FK</span><span class="person-dot hk" title="Hal">HK</span><span class="person-dot sk" title="Stacy">SK</span></div>
+              </div>
               <p>Indian Ocean in Cockeysville is the leading candidate. Dad suggested it; Stacy planned to check food restrictions.</p>
             </div>
             <div class="event-meta"><span class="chip">Indian Ocean candidate</span><span class="chip">Roeths possible</span></div>
           </section>
         </div>
+        <p class="filter-empty">No Saturday itinerary items match this person.</p>
 
         <div class="leave-board">
           <section class="leave-card">
@@ -792,33 +965,43 @@
         </header>
 
         <div class="timeline">
-          <section class="event">
+          <section class="event" data-people="jk fk">
             <div class="event-time">7:00 am</div>
             <div class="event-body">
-              <h3>Dogs, meds, packing</h3>
+              <div class="event-title">
+                <h3>Dogs, meds, packing</h3>
+                <div class="person-dots" aria-label="People: Jim, Francine"><span class="person-dot jk" title="Jim">JK</span><span class="person-dot fk" title="Francine">FK</span></div>
+              </div>
               <p>Francine estimated this takes real time. Jim and Francine are not planning to join breakfast.</p>
             </div>
             <div class="event-meta"><span class="chip">Jim</span><span class="chip">Francine</span><span class="chip">Dogs</span></div>
           </section>
 
-          <section class="event">
+          <section class="event" data-people="d m hk sk">
             <div class="event-time">8:30 am</div>
             <div class="event-body">
-              <h3>Panera breakfast</h3>
+              <div class="event-title">
+                <h3>Panera breakfast</h3>
+                <div class="person-dots" aria-label="People: Dad, Maria, Hal, Stacy"><span class="person-dot d" title="Dad">D</span><span class="person-dot m" title="Maria">M</span><span class="person-dot hk" title="Hal">HK</span><span class="person-dot sk" title="Stacy">SK</span></div>
+              </div>
               <p>Hal and Stacy meet Dad and Maria at a local Panera, then head home afterward.</p>
             </div>
             <div class="event-meta"><span class="chip">Hal</span><span class="chip">Stacy</span><span class="chip">Dad/Maria</span></div>
           </section>
 
-          <section class="event">
+          <section class="event" data-people="jk fk hk sk">
             <div class="event-time">11:00 am</div>
             <div class="event-body">
-              <h3>Checkout</h3>
+              <div class="event-title">
+                <h3>Checkout</h3>
+                <div class="person-dots" aria-label="People: Jim, Francine, Hal, Stacy"><span class="person-dot jk" title="Jim">JK</span><span class="person-dot fk" title="Francine">FK</span><span class="person-dot hk" title="Hal">HK</span><span class="person-dot sk" title="Stacy">SK</span></div>
+              </div>
               <p>Rental checkout is 11:00 am. Jim and Francine should plan dog meds, packing, loading, and departure around that deadline.</p>
             </div>
             <div class="event-meta"><span class="chip">Confirmed</span><span class="chip">Rental</span></div>
           </section>
         </div>
+        <p class="filter-empty">No Sunday itinerary items match this person.</p>
 
         <div class="leave-board">
           <section class="leave-card">
@@ -937,10 +1120,36 @@
 
     const buttons = Array.from(document.querySelectorAll(".tab-button"));
     const panels = Array.from(document.querySelectorAll(".day-panel"));
+    const filterButtons = Array.from(document.querySelectorAll(".filter-button"));
+    const events = Array.from(document.querySelectorAll(".event[data-people]"));
+    let activePerson = "all";
 
     function selectTab(button) {
       buttons.forEach((item) => item.setAttribute("aria-selected", String(item === button)));
       panels.forEach((panel) => panel.classList.toggle("active", panel.id === button.getAttribute("aria-controls")));
+      applyPersonFilter();
+    }
+
+    function eventMatchesPerson(event) {
+      if (activePerson === "all") {
+        return true;
+      }
+      return event.dataset.people.split(/\s+/).includes(activePerson);
+    }
+
+    function applyPersonFilter() {
+      events.forEach((event) => {
+        event.hidden = !eventMatchesPerson(event);
+      });
+
+      panels.forEach((panel) => {
+        const panelEvents = Array.from(panel.querySelectorAll(".event[data-people]"));
+        const hasVisibleEvents = panelEvents.some((event) => !event.hidden);
+        const emptyMessage = panel.querySelector(".filter-empty");
+        if (emptyMessage) {
+          emptyMessage.classList.toggle("active", !hasVisibleEvents);
+        }
+      });
     }
 
     buttons.forEach((button, index) => {
@@ -957,6 +1166,14 @@
         if (event.key === "End") nextIndex = buttons.length - 1;
         buttons[nextIndex].focus();
         selectTab(buttons[nextIndex]);
+      });
+    });
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activePerson = button.dataset.person;
+        filterButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        applyPersonFilter();
       });
     });
   </script>
